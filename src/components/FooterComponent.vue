@@ -3,7 +3,7 @@
     <div class="bg-gray-400">
       <div class=" mt-7 grid grid-cols-9 lg:ml-32 ml-5 py-10 gap-10">
         <div class="md:col-span-3 col-span-9">
-          <img src="https://lucas.vn/wp-content/uploads/2021/06/shopee-logo-DD5CAE562A-seeklogo.com_.png" alt="" key="
+          <img src="https://gigamall.com.vn/data/2019/09/05/15023424_LOGO-NIKE-500x500.jpg" alt="" key="
           " class="w-18 h-16 ">
           <p class="font-bold mt-5">
             Công ty TNHH 1 thành viên Luân

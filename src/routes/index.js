@@ -29,6 +29,32 @@ export const router = new VueRouter({
             name: 'cart',
             component:()=> import('@/pages/CartComponent')
         },
+        {
+            path: '/check-out',
+            name: 'checkout',
+            component:()=> import('@/pages/CheckComponent')
+        },
+        {
+            path: '/update-profile',
+            name: 'update-profile',
+            component:()=> import('@/pages/UpdateProfileComponent')
+        },
+        {
+            path: '/order-tracking',
+            name: 'ordertracking',
+            component:()=> import('@/pages/OrderTrackingCompoent')
+        },
+        {
+            path: '/order-detail',
+            name: 'orderdetail',
+            component:()=> import('@/pages/OrderCompoent')
+        },
+        {
+            path: '/filter-products',
+            name: 'orderdetail',
+            component:()=> import('@/pages/FilterProductComponent')
+        },
+
     ],
     mode:"history"
 })

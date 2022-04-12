@@ -13,16 +13,7 @@ function getHeaders() {
     return headers;
 }
 
-function getInstance() {
-    if (axiosInstance != null) {
-        return axiosInstance
-    }
-    axiosInstance = axios.create({
-        baseURL: process.env.VUE_APP_BASE_API,
-        headers: getHeaders()
-    })
-    return axiosInstance;
-}
+
 
 function get(endpointApiUrl, payload = {}) {
     return getInstance().get(endpointApiUrl, {
@@ -42,6 +33,35 @@ function del(endpointApiUrl, payload = {}) {
     return getInstance().delete(endpointApiUrl, payload)
 }
 
+function getInstance() {
+    if (axiosInstance != null) {
+        return axiosInstance
+    }
+    axiosInstance = axios.create({
+        baseURL: process.env.VUE_APP_BASE_API,
+        headers: getHeaders()
+    })
+    //hook interceptor cài ở đây
+    axiosInstance.interceptors.request.use(config => {
+        const token = localStorage.getItem('token');
+        if (token) {
+            config.headers.Authorization = `Bearer ${token}`;
+        }
+        return config;
+    })
+
+    axiosInstance.interceptors.response.use(response => {
+        return response;
+    }, error => {
+        if (error.response.status === 401) {
+            localStorage.removeItem('token');
+            alert('Bạn phải đăng nhập để truy cập vào api này');
+            window.location.href = '/dang-nhap';
+        }
+        return Promise.reject(error);
+    })
+    return axiosInstance;
+}
 export const Axios = {
     axiosInstance,
     getHeaders,
