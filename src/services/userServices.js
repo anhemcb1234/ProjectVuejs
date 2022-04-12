@@ -1,3 +1,4 @@
+
 import { Axios } from "./Axios";
 
 function SignIn(payload) {
@@ -26,8 +27,14 @@ function getOrderDetail() {
     return Axios.get("my-orders/1");
 }
 
-function UpdateAvatar(payload) {
-    return Axios.post("update-avatar",payload);
+function UpdateAvatar(formData) {
+    Axios.setHeaders({ 'Content-Type': 'multipart/form-data' })
+    return Axios.post("update-avatar",formData
+    ).then((res)=> {
+        console.log(res);
+    }).catch((err)=>{
+        alert(err);
+    })
 }
 export const userServices = {
     SignIn,

@@ -12,17 +12,19 @@
                 </div>
             </article>
             <div class="track flex">
-                <div @change="check()" class="step" :class="to-1 >= 0 ? 'active' : 'none'"> <span class="icon"> <i class="fa fa-check"></i> </span> <span class="text">Pending</span> </div>
-                <div @change="check()" class="step" :class="to-1 >= 1 ? 'active' : 'none'"> <span class="icon"> <i class="fa fa-user"></i> </span> <span class="text"> Processing</span> </div>
-                <div @change="check()" class="step" :class="to-1 >= 2 ? 'active' : 'none'"> <span class="icon"> <i class="fa fa-truck"></i> </span> <span class="text"> Sent </span> </div>
-                <div @change="check()" class="step" :class="to-1 >= 3 ? 'active' : 'none'"> <span class="icon"> <i class="fa fa-box"></i> </span> <span class="text">Received</span> </div>
-                <div @change="check()" class="step" :class="to-1 >= 4 ? 'active' : 'none'"> <span class="icon"> <i class="fa-solid fa-ban"></i> </span> <span class="text">Cancel order</span> </div>
+                <div  class="step" :class="to-1 >= 0 ? 'active' : 'none'"> <span class="icon"> <i class="fa fa-check"></i> </span> <span class="text">Pending</span> </div>
+                <div  class="step" :class="to-1 >= 1 ? 'active' : 'none'"> <span class="icon"> <i class="fa fa-user"></i> </span> <span class="text"> Processing</span> </div>
+                <div  class="step" :class="to-1 >= 2 ? 'active' : 'none'"> <span class="icon"> <i class="fa fa-truck"></i> </span> <span class="text"> Sent </span> </div>
+                <div  class="step" :class="to-1 >= 3 ? 'active' : 'none'"> <span class="icon"> <i class="fa fa-box"></i> </span> <span class="text">Received</span> </div>
+                <div  class="step" :class="to-1 >= 4 ? 'active' : 'none'"> <span class="icon"> <i class="fa-solid fa-ban"></i> </span> <span class="text">Cancel order</span> </div>
             </div>
             <hr>
             <div class="row grid grid-cols-1 gap-2">
-                <div class="w-full p-5" v-for="(itemCart, itemCartIndex) in this.order.data[this.id].products" :key="itemCartIndex">
-                    <h2>Tên sản phẩm {{itemCart.name}}</h2>
-                    <p>Giá sản phầm {{itemCart.price}}</p>
+                <div class="w-full p-5 grid grid-cols-4 gap-2" v-for="(itemCart, itemCartIndex) in this.order.data[this.id].products" :key="itemCartIndex">
+                    <h2 class="text-center">Tên sản phẩm {{itemCart.name}}</h2>
+                    <p class="text-center">Giá sản phẩm {{itemCart.price}}</p>
+                    <p class="text-center">Số lượng {{itemCart.quantity}}</p>
+                    <p class="text-center">Giá {{itemCart.price * itemCart.quantity}}</p>
                 </div>
             </div>
 
@@ -54,6 +56,7 @@ export default {
             this.order = reps.data
             this.to = reps.data.data[0].status
             this.users = this.order.data[this.id]
+            console.log(this.users)
         },
         async getUser() {
             const reps = await userServices.getUser();

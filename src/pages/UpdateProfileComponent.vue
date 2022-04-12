@@ -10,7 +10,7 @@
                     <input type="text" class="block border border-grey-light w-full p-3 rounded mb-4" name="email" placeholder="Email" v-model="email" />
                     <input type="text" class="block border border-grey-light w-full p-3 rounded mb-4" name="phone" placeholder="Phone Number" v-model="phoneNumber" />
                     <img :src="previewImage" class="uploading-image  " />
-                    <input type="file" class="p-3 mb-4" @change=uploadImage>
+                    <input type="file" class="p-3 mb-4" @change='uploadImage'>
                     <button class="w-full text-center bg-black hover:bg-white hover:text-black font-semibold text-white py-2 px-4 border border-gray-400 rounded shadow">Update</button>
                 </form>
                 <button @click="logOut()" class="w-full text-center px-4 py-3 bg-black rounded-md shadow-md text-white font-semibold">Log out</button>
@@ -79,15 +79,9 @@ export default {
         async uploadImage(e) {
             try {
                 const image = e.target.files[0];
-                const reader = new FileReader();
-                reader.readAsDataURL(image);
-                reader.onload = e => {
-                    this.previewImage = e.target.result;
-                    console.log(e.target.result)
-                    userServices.UpdateAvatar({
-                        avatar: this.previewImage
-                    });
-                };
+                const formData = new FormData();
+                formData.append('avatar', image);
+                await userServices.UpdateAvatar(formData);
                 alert("Cập nhật ảnh đại diện thành công");
             } catch (e) {
                 alert(e)
